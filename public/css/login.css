@@ -1,0 +1,74 @@
+body {
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.containts {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.form-signin {
+  width: 40%;
+  padding: 15px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 20px 40px 20px;
+}
+
+
+
+.form-signin .form-control {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 40px;
+  text-align: left;
+  box-shadow: none;
+  letter-spacing: 1px;
+}
+
+.form-signin .form-control::placeholder {
+  font-weight: lighter;
+}
+
+.form-signin .btn-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .submit.form-new, .submit.form-submit {
+    width: 30%;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(255, 145, 0);
+    color: black;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+  }
+  
+  .submit.form-submit {
+    background-color: aqua;
+    text-decoration: none;
+    margin-left: 15px;
+  }
+  
+  .submit.form-new:hover, .submit.form-submit:hover {
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+  }

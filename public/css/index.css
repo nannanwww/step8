@@ -1,0 +1,174 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 800px
+}
+
+.containts {
+  width: 640px;
+  height: 550px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  padding: 0;
+}
+
+form.search {
+  position: fixed;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 600px;
+  padding: 10px;
+  background-color: white;
+}
+
+
+h1 {
+  text-align: left;
+}
+
+.key-company {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23fff" stroke="%23000" stroke-width="1.5" d="M0 1l6 6 6-6H0z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px top 50%;
+  background-size: 12px 8px;
+  padding-right: 20px;
+  background-color: #fff;
+}
+
+#search_button {
+  margin-left: 3px;
+  padding: 4px 18px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #fff;
+  border: 1px solid #cfcfcffa;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  vertical-align: middle;
+}
+
+#search_button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+table#products_table {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 70px;
+  padding: 10px;
+  border-collapse: collapse;
+}
+
+#products_table td,
+#products_table th {
+  vertical-align: middle;
+  border: 1px solid #ccc;
+  padding: 8px;
+  height: 30px;
+}
+
+
+#products_table th {
+  background-color: white;
+}
+
+#products_table tr:nth-child(even) {
+  background-color: #dbdbdb; /* 偶数行の背景色を灰色に */
+}
+
+#products_table td:nth-child(6) { /* メーカー名の列 */
+  text-align: center;
+}
+
+input[type="text"],
+select {
+  width: 200px;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 100px;
+  height: auto;
+}
+
+.create {
+  margin-left: 2px;
+  color: #ffffff;
+  background-color: rgb(255, 153, 0);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  font-weight: lighter;
+  display: inline-block;
+}
+
+.create:hover {
+  background-color: rgb(255, 183, 30); /* ホバー時に少し明るい色に変更 */
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-containts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail,
+.delete-btn {
+  color: #050505;
+  background-color: aqua;
+  text-decoration: none;
+  padding: 4px 9px;
+  border-radius: 4px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.detail:hover,
+.delete-btn:hover {
+  box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  margin: 0 2px;
+}
+
+.pagination {
+  position: fixed;
+  top: 800px;
+  transform: translateX(-50%);
+  padding: 20px 10px;
+  font-size: 20px;
+  margin-left: 280px;
+}
+
+.pagination a {
+  padding: 3px 8px;
+  font-size: 20px;
+  color: blue;
+  margin: -2.5px;
+}
+
+.pagination span {
+  padding: 3px 8px;
+  font-size: 20px;
+  border: 1px solid black;
+  margin: -2.5px;
+}
