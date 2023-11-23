@@ -11,7 +11,7 @@
 <body>
     <div class="wrapper">
         <h1>商品情報詳細画面</h1>
-        <div class="containts">
+        <div class="contains">
             <form action="{{ route('products.edit', ['id' => $product->id]) }}" method="GET"
                 enctype="multipart/form-data">
                 @csrf

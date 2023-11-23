@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="containts">
+    <div class="contains">
         <form class="search" method="GET">
             @csrf
             <h1>商品一覧画面</h1>
@@ -53,7 +53,7 @@
                 <td>{{ $product->stock }}</td>
                 <td>{{ $product->company }}</td>
                 <td>
-                    <div class="btn-containts">
+                    <div class="btn-contains">
                         <button onclick="saveSearchParamsAndRedirect('{{ json_encode(request()->query()) }}', '{{ route('products.showDetail',
                             ['id' => $product->id]) }}')" class="detail">詳細</button>
                         <form action="{{ route('products.delete', ['id' => $product->id]) }}" method="POST"

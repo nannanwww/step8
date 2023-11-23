@@ -25,7 +25,7 @@
             </ul>
         </div>
         @endif
-        <div class="containts">
+        <div class="contains">
             <form id="editForm" action="{{ route('products.update', $product->id) }}" method="post"
                 enctype="multipart/form-data">
                 @method('PUT')

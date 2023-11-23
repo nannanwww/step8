@@ -7,13 +7,13 @@ body {
   box-sizing: border-box;
 }
 
-.containts {
+.contains {
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
 }
 
-.form-signin {
+.form-sign-in {
   width: 40%;
   padding: 15px;
   margin-bottom: 40px;
@@ -25,7 +25,7 @@ h1 {
   margin: 20px 20px 40px 20px;
 }
 
-.form-signin .form-control {
+.form-sign-in .form-control {
   width: 100%;
   border: 1px solid #ccc;
   padding: 10px;
@@ -35,11 +35,11 @@ h1 {
   letter-spacing: 1px;
 }
 
-.form-signin .form-control::placeholder {
+.form-sign-in .form-control::placeholder {
   font-weight: lighter;
 }
 
-.form-signin .btn-container {
+.form-sign-in .btn-container {
   display: flex;
   justify-content: space-between;
 }
