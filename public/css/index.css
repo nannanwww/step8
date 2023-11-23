@@ -6,7 +6,7 @@ body {
 }
 
 .containts {
-  width: 640px;
+  width: 780px;
   height: 550px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
@@ -19,11 +19,10 @@ form.search {
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
-  max-width: 600px;
+  max-width: 700px;
   padding: 10px;
   background-color: white;
 }
-
 
 h1 {
   text-align: left;
@@ -31,7 +30,9 @@ h1 {
 
 .key-company {
   appearance: none;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23fff" stroke="%23000" stroke-width="1.5" d="M0 1l6 6 6-6H0z"/></svg>');
+  background-image: url(
+    'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23fff" stroke="%23000" stroke-width="1.5" d="M0 1l6 6 6-6H0z"/></svg>'
+    );
   background-repeat: no-repeat;
   background-position: right 8px top 50%;
   background-size: 12px 8px;
@@ -58,7 +59,7 @@ h1 {
 
 table#products_table {
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   margin-top: 70px;
   padding: 10px;
   border-collapse: collapse;
@@ -72,13 +73,12 @@ table#products_table {
   height: 30px;
 }
 
-
 #products_table th {
   background-color: white;
 }
 
 #products_table tr:nth-child(even) {
-  background-color: #dbdbdb; /* 偶数行の背景色を灰色に */
+  background-color: #dbdbdb; /* 偶数行の背景色を灰色 */
 }
 
 #products_table td:nth-child(6) { /* メーカー名の列 */
@@ -87,7 +87,7 @@ table#products_table {
 
 input[type="text"],
 select {
-  width: 200px;
+  width: 250px;
   padding: 8px;
   margin-right: 10px;
   border: 1px solid #ccc;
@@ -114,7 +114,7 @@ img {
 }
 
 .create:hover {
-  background-color: rgb(255, 183, 30); /* ホバー時に少し明るい色に変更 */
+  background-color: rgb(255, 183, 30);
   box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
   transform: translateY(-1px);
 }

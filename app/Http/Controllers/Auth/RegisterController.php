@@ -8,13 +8,10 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {
-    public function showRegistrationForm()
-    {
-        return view('auth.register');
-    }
+    public function showRegistrationForm() {
+        return view('auth.register'); }
 
-    public function register(Request $request)
-    {
+    public function register(Request $request) {
         $request->validate([
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|confirmed',
@@ -27,6 +24,5 @@ class RegisterController extends Controller
     
         auth()->login($user);
 
-        return redirect('/');
-    }
+        return redirect('/'); }
 }

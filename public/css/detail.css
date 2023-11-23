@@ -21,7 +21,7 @@ body {
 
 .containts h1 {
     text-align: center;
-    margin-bottom: 20px; /* h1と他の要素の間に余白を追加 */
+    margin-bottom: 20px;
 }
 
 .product-details {
@@ -85,7 +85,7 @@ img{
 }
 
 .submit {
-    width: 150px; /* ボタンの幅を固定 */
+    width: 150px;
     padding: 10px;
     border-radius: 10px;
     border: none;
@@ -93,7 +93,7 @@ img{
     text-align: center;
     font-weight: bold;
     text-decoration: none;
-    margin: 0 5px; /* ボタン間の間隔 */
+    margin: 0 5px;
 }
 
 .submit.form-new,
@@ -104,7 +104,7 @@ img{
 .submit.form-submit,
 .submit.edit,
 .submit.update {
-    background-color: aqua; /* ボタンの色 */
+    background-color: aqua; /* 実行ボタンの色 */
     margin-left: 15px;
 }
 

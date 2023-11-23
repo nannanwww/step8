@@ -9,6 +9,11 @@
 <body>
 <div class="wrapper">
     <h1>商品情報の編集</h1>
+    @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -63,27 +68,14 @@
 
                 <div class="button-container">
                     <button type="submit" class="submit update">更新</button>
-                    <button type="button" onclick="location.href='{{ route('products.showDetail', ['id' => $product->id]) }}'" class="submit back">戻る</button>
+                    <button type="button" onclick="location.href='{{ route('products.showDetail', ['id' => $product->id]) }}'"
+                    class="submit back">戻る</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function submitForm() {
-        $.ajax({
-            url: $('#editForm').attr('action'),
-            type: 'POST',
-            data: $('#editForm').serialize(),
-            success: function(response) {
-                console.log("成功です。");
-            },
-            error: function(xhr, status, error) {
-                console.log("エラーです。");
-            }
-        });
-    }
-</script>
+<script src="{{ asset('js/edit.js') }}"></script>
 </body>
 </html>

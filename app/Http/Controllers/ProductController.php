@@ -8,8 +8,7 @@ use App\Models\Product;
 class ProductController extends Controller
 {
 
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         $products = Product::query();
         $companies = Product::pluck('company')->unique();
 
@@ -44,107 +43,18 @@ class ProductController extends Controller
             'companies' => $companies,
             'errorMessage' => $errorMessage,
             'requestParams' => $requestParams,
-        ]);
-    }
+        ]); }
 
+    public function showDetail($id) {
+        $product = Product::find($id);
     
+        return view('products.detail', ['product'=> $product]); }
 
-
-
-    public function create() 
-    {
-        $companies = Product::pluck('company')->unique();
-        return view('products.create', ['companies' => $companies]);
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'product_name' => 'required|max:20',
-            'company' => 'required|max:20',
-            'price' => 'required|integer',
-            'stock' => 'required|integer',
-            'description' => 'nullable|max:140',
-            'image' => 'nullable|image|max:2048',
-        ]);
-
-        $product = new Product;
-        $product->product_name = $request->input("product_name");
-        $product->company = $request->input("company");
-        $product->price = $request->input("price");
-        $product->stock = $request->input("stock");
-        $product->description = $request->input("description");
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName); // 画像を保存
-            $product->image = 'storage/images/' . $imageName;
-        }
-        
-        $product->save();
-
-        return redirect('/products');
-    }
-
-    public function showDetail($id) 
-    {
-        $product = Product::find($id); // 
-    
-        return view('products.detail', ['product'=> $product]);
-    }
-
-    public function delete($id) 
-    {
+    public function delete($id) {
         $product = Product::findOrFail($id);
         logger($product); 
     
         $product->delete();
-        return redirect('/products');
-    }
-
-    public function edit($id) 
-    {
-        $product = Product::find($id); // 
-        if (!$product) {
-            // 商品が存在しない場合の処理
-            abort(404);
-        }
-        return view('products.edit', ['product' => $product]);
-    }
-
-
-
-    public function update(Request $request, $id) 
-    {
-        $product = Product::find($id);
-
-        $request->validate([
-            'product_name' => 'required|max:20',
-            'company' => 'required|max:20',
-            'price' => 'required|integer',
-            'stock' => 'required|integer',
-            'description' => 'nullable|max:140',
-            'image' => 'nullable|image|max:2048',
-        ]);
-
-        // 更新処理
-        $product->product_name = $request->input("product_name");
-        $product->company = $request->input("company");
-        $product->price = $request->input("price");
-        $product->stock = $request->input("stock");
-        $product->description = $request->input("description");
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/images', $imageName);
-            $product->image = 'storage/images/' . $imageName;
-        }
-    
-        $product->save();
-
-        return redirect()->route('products.showDetail', ['id' => $id])->with('success', 'Product updated successfully');
-    }
+        return redirect('/products'); }
 
 }

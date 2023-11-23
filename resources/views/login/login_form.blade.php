@@ -7,28 +7,28 @@
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
 </head>
 <body>
-<form class="form-signin" method="POST" action="{{route('login')}}">
-    @csrf
-    <h1 class="h3 mb-3 font-weight-normal">ユーザーログイン画面</h1>
+    <form class="form-signin" method="POST" action="{{route('login')}}">
+        @csrf
+        <h1 class="h3 mb-3 font-weight-normal">ユーザーログイン画面</h1>
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
   
-    <input type="password" id="inputPassword" class="form-control" placeholder="パスワード" name="password">
-    <input type="email" id="inputEmail" class="form-control" placeholder="アドレス" name="email">
+        <input type="password" id="inputPassword" class="form-control" placeholder="パスワード" name="password">
+        <input type="email" id="inputEmail" class="form-control" placeholder="アドレス" name="email">
   
     
-  <div class="button-container">
-        <button class="submit form-submit" type="submit">ログイン</button>
-        <a href="{{ route('showRegistrationForm') }}" class="submit form-new">新規登録</a>
-  </div>
-</form>
+        <div class="button-container">
+            <button class="submit form-submit" type="submit">ログイン</button>
+            <a href="{{ route('showRegistrationForm') }}" class="submit form-new">新規登録</a>
+        </div>
+    </form>
 </body>
 </html>

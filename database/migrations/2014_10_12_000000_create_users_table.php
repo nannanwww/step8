@@ -11,23 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
-        });
-    }
+        }); }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('users');
-    }
+    public function down() {
+        Schema::dropIfExists('users'); }
 };

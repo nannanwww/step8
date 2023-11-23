@@ -49,8 +49,12 @@
                 </div>
             </div>
             <div class="button-container">
-                <button type="button" onclick="location.href='{{ route('products.edit', ['id' => $product->id]) }}'" class="submit edit">編集</button>
-                <button type="button" onclick="location.href='{{ route('products.index') }}?page={{ session('products_page', 1) }}&{{ session('searchParams', '') }}'" class="submit back">戻る</button>
+                <button type="button" onclick="location.href=
+                '{{ route('products.edit', ['id' => $product->id]) }}'"
+                class="submit edit">編集</button>
+                <button type="button" onclick="location.href=
+                '{{ route('products.index') }}?page={{ session('products_page', 1) }}&{{ session('searchParams', '') }}'"
+                class="submit back">戻る</button>
             </div>
         </form>
     </div>
