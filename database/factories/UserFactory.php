@@ -15,11 +15,13 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition() {
+    public function definition()
+    {
         return [
             'user_name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => bcrypt('password'), 
-        ]; }
+            'password' => bcrypt('password'),
+        ];
+    }
 
 }

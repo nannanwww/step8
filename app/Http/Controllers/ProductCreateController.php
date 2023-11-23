@@ -7,11 +7,14 @@ use App\Models\Product;
 
 class ProductCreateController extends Controller
 {
-    public function create() {
+    public function create()
+    {
         $companies = Product::pluck('company')->unique();
-        return view('products.create', ['companies' => $companies]); }
+        return view('products.create', ['companies' => $companies]);
+    }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'product_name' => 'required|max:20',
             'company' => 'required|max:20',
@@ -34,8 +37,9 @@ class ProductCreateController extends Controller
             $image->storeAs('public/images', $imageName); // 画像を保存
             $product->image = 'storage/images/' . $imageName;
         }
-        
+
         $product->save();
 
-        return redirect('/products/create')->with('success', '商品が登録されました'); }
+        return redirect('/products/create')->with('success', '商品が登録されました');
+    }
 }

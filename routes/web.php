@@ -19,16 +19,16 @@ use App\Http\Controllers\ProductEditController;
 |
 */
 
-Route::get('/',[AuthController::class,'showLogin']) -> name('showLogin');
-Route::post('/login',[AuthController::class,'login']) -> name('login');
+Route::get('/', [AuthController::class, 'showLogin'])->name('showLogin');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('/register', [RegisterController::class,'showRegistrationForm'])->name('showRegistrationForm');
-Route::post('/register', [RegisterController::class,'register']) -> name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('showRegistrationForm');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
 //Route::get('home',[HomeController::class,'home']) -> name('home');
 
-Route::get('home',function(){
+Route::get('home', function () {
     return view('home');
-} )-> name('home');
+})->name('home');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 

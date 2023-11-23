@@ -8,7 +8,8 @@ use App\Models\Product;
 class ProductController extends Controller
 {
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $products = Product::query();
         $companies = Product::pluck('company')->unique();
 
@@ -16,9 +17,9 @@ class ProductController extends Controller
         $company = $request->input('key_company');
 
         if ($keyword) {
-            $products = $products->where(function($query) use ($keyword) {
+            $products = $products->where(function ($query) use ($keyword) {
                 $query->where('product_name', 'like', '%' . $keyword . '%')
-                      ->orWhere('description', 'like', '%' . $keyword . '%');
+                    ->orWhere('description', 'like', '%' . $keyword . '%');
             });
         }
 
@@ -37,24 +38,29 @@ class ProductController extends Controller
         }
 
         $requestParams = $request->getQueryString();
-        
+
         return view('products.index', [
             'products' => $products,
             'companies' => $companies,
             'errorMessage' => $errorMessage,
             'requestParams' => $requestParams,
-        ]); }
+        ]);
+    }
 
-    public function showDetail($id) {
+    public function showDetail($id)
+    {
         $product = Product::find($id);
-    
-        return view('products.detail', ['product'=> $product]); }
 
-    public function delete($id) {
+        return view('products.detail', ['product' => $product]);
+    }
+
+    public function delete($id)
+    {
         $product = Product::findOrFail($id);
-        logger($product); 
-    
+        logger($product);
+
         $product->delete();
-        return redirect('/products'); }
+        return redirect('/products');
+    }
 
 }

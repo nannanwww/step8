@@ -13,14 +13,16 @@ class ProductSeeder extends Seeder
      *
      * @return void
      */
-    public function run() {
+    public function run()
+    {
         DB::table('products')->insert([
-            'image' => 'd:\ピクチャD\00.jpg', 
+            'image' => 'd:\ピクチャD\00.jpg',
             'product_name' => 'サンプル商品',
             'price' => 1000,
             'stock' => 50,
             'company' => 'サンプルカンパニー',
             'created_at' => now(),
             'updated_at' => now(),
-        ]); }
+        ]);
+    }
 }

@@ -7,16 +7,19 @@ use App\Models\Product;
 
 class ProductEditController extends Controller
 {
-    public function edit($id) {
+    public function edit($id)
+    {
         $product = Product::find($id);
 
         if (!$product) {
             abort(404); // 商品が見つからない場合の処理
         }
 
-        return view('products.edit', ['product' => $product]); }
+        return view('products.edit', ['product' => $product]);
+    }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $product = Product::find($id);
 
         $request->validate([
@@ -41,9 +44,10 @@ class ProductEditController extends Controller
             $image->storeAs('public/images', $imageName);
             $product->image = 'storage/images/' . $imageName;
         }
-    
+
         $product->save();
 
-        return redirect()->route('products.update', ['id' => $id])->with('success', 'Product updated successfully'); }
+        return redirect()->route('products.update', ['id' => $id])->with('success', 'Product updated successfully');
+    }
 
 }

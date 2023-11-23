@@ -11,6 +11,8 @@ class HomeController extends Controller
 {
     use AuthenticatesUsers;
     protected $redirectTo = '/products';
-    public function home() {
-        return view('views.products/index'); }
+    public function home()
+    {
+        return view('views.products/index');
+    }
 }
