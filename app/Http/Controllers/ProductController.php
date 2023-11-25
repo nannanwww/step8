@@ -142,7 +142,16 @@ class ProductController extends Controller
 
         try {
             $product = Product::findOrFail($id);
-            logger($product);
+
+            $companyId = $product->company_id;
+
+            // Productを削除する前に、その会社に他の商品がないかチェックする
+            $otherProducts = Product::where('company_id', $companyId)->where('id', '!=', $id)->count();
+
+            if ($otherProducts === 0) {
+                // その会社に他の商品がない場合は、会社も削除する
+                Company::where('id', $companyId)->delete();
+            }
 
             $product->delete();
 
