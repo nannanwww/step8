@@ -68,13 +68,17 @@
                             @if ($product->image)
                             <img src="{{ asset('storage/images/' . basename($product->image)) }}" alt="商品画像"
                                 class="product_image">
+                            <input type="file" name="image" id="image" accept="image/*" value="{{$product->image}}"
+                                class="input-file">
                             @else
                             <div class="spacer">
                                 No image
+                                <!-- ②商品編集時に画像を選択しなおさないと登録ができなくなってしまっているので、 
+                                画像が選ばれていない時はimageカラムへの更新をスキップするようにしましょう。
+                                <input type="file" name="image" id="image" accept="image/*" value="{{$product->image}}"
+                                    class="input-file"> -->
                             </div>
                             @endif
-                            <input type="file" name="image" id="image" accept="image/*" value="{{$product->image}}"
-                                class="input-file">
                         </div>
                     </div>
 
