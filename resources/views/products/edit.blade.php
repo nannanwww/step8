@@ -36,23 +36,30 @@
                         <input type="text" name="productId" id="productId" value="{{ $product->id }}" readonly>
                     </div>
                     <div class="detail-row">
-                        <label for="">商品名<span>*</span></label>
+                        <label for="product_name">商品名<span>*</span></label>
                         <input type="text" name="product_name" id="product_name" value="{{$product->product_name}}">
                     </div>
                     <div class="detail-row">
-                        <label for="">メーカー名<span>*</span></label>
-                        <input type="text" name="company" id="company" value="{{$product->company}}">
+                        <label for="inputCompany">メーカー名<span>*</span></label>
+                        <input type="text" list="companies" name="company_name" required
+                            value="{{ $companies[$product->company_id] ?? '' }}">
+                        <datalist id="companies">
+                            <option value="">会社名を選択してください</option>
+                            @foreach($companies as $company)
+                            <option value="{{ $company }}">
+                                @endforeach
+                        </datalist>
                     </div>
                     <div class="detail-row">
-                        <label for="">価格<span>*</span></label>
+                        <label for="price">価格<span>*</span></label>
                         <input type="text" name="price" id="price" value="{{$product->price}}">
                     </div>
                     <div class="detail-row">
-                        <label for="">在庫数<span>*</span></label>
+                        <label for="stock">在庫数<span>*</span></label>
                         <input type="text" name="stock" id="stock" value="{{$product->stock}}">
                     </div>
                     <div class="detail-row">
-                        <label for="">コメント</label>
+                        <label for="description">コメント</label>
                         <textarea name="description" id="description">{{$product->description}}</textarea>
                     </div>
                     <div class="detail-row">

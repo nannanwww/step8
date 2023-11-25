@@ -17,8 +17,8 @@
                 <input type="text" id="key_word" class="key-word" placeholder="検索キーワード" name="key_word">
                 <select type="text" id="key_company" class="key-company" placeholder="メーカー名" name="key_company">
                     <option value="">メーカー名を選択</option>
-                    @foreach ($companies as $company)
-                    <option value="{{ $company }}">{{ $company }}</option>
+                    @foreach($companies as $id => $company)
+                    <option value="{{ $id }}">{{ $company }}</option>
                     @endforeach
                 </select>
                 <button type="submit" id="search_button">検索</button>
@@ -51,7 +51,7 @@
                 <td>{{ $product->product_name }}</td>
                 <td>{{ $product->price }} 円</td>
                 <td>{{ $product->stock }}</td>
-                <td>{{ $product->company }}</td>
+                <td>{{ $companies[$product->company_id] }}</td>
                 <td>
                     <div class="btn-contains">
                         <button onclick="saveSearchParamsAndRedirect('{{ json_encode(request()->query()) }}', '{{ route('products.showDetail',

@@ -27,7 +27,7 @@
                     </div>
                     <div class="detail-row">
                         <label for="companyName">メーカー名</label>
-                        <input type="text" name="companyName" id="companyName" value="{{ $product->company }}" readonly>
+                        <input type="text" name="companyName" id="companyName" value="{{ $companyName }}" readonly>
                     </div>
                     <div class="detail-row">
                         <label for="price">価格</label>

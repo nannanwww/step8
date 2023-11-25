@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form class="form-signin" method="POST" action="{{ route('register') }}">
+    <form class="form-login" method="POST" action="{{ route('register') }}">
         @csrf
         <h1 class="h3 mb-3 font-weight-normal">ユーザー新規登録画面</h1>
 

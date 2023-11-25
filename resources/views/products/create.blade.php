@@ -35,10 +35,10 @@
                     </div>
                     <div class="detail-row">
                         <label for="inputCompany">メーカー名<span>*</span></label>
-                        <input type="text" list="companies" name="company" required>
+                        <input type="text" list="companies" name="company_name" required>
                         <datalist id="companies">
                             <option value="">会社名を選択してください</option>
-                            @foreach($companies as $company)
+                            @foreach($companies as $id => $company)
                             <option value="{{ $company }}">{{ $company }}</option>
                             @endforeach
                         </datalist>

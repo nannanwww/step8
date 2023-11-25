@@ -11,11 +11,9 @@ $(document).ready(function() {
     });
 
     $('.delete-form').submit(function(event) {
-        // フォーム送信をキャンセル
         event.preventDefault();
 
         var productId = $(this).find('.product-id').val();
-        // 確認を表示
         var confirmation = window.confirm("ID:" + productId + "を消去しますか？");
         if (confirmation) {
             // 確認があればフォームを再度送信して削除を実行
@@ -24,7 +22,7 @@ $(document).ready(function() {
     });
 
     $('#search_form').submit(function(event) {
-        event.preventDefault(); // デフォルトの送信を停止
+        event.preventDefault();
 
         var keyword = $('#key_word').val();
         var company = $('#key_company').val();

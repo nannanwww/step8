@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
             'product_name' => 'サンプル商品',
             'price' => 1000,
             'stock' => 50,
-            'company' => 'サンプルカンパニー',
+            'company_id' => '1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

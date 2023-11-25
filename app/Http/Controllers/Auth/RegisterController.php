@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class RegisterController extends Controller
 {
@@ -20,13 +23,28 @@ class RegisterController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        $user = User::create([
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-        ]);
+        // トランザクションの開始
+        DB::beginTransaction();
 
-        auth()->login($user);
+        try {
+            $user = User::create([
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+            ]);
 
-        return redirect('/');
+            DB::commit();
+
+            auth()->login($user);
+
+            return redirect('/');
+        } catch (\Exception $e) {
+            // エラー時の処理
+            DB::rollBack();
+
+            // エラーをログに記録する
+            Log::error('エラーが発生しました: ' . $e->getMessage());
+
+            return back()->withInput()->withErrors(['error' => 'ユーザー登録中にエラーが発生しました。']);
+        }
     }
 }

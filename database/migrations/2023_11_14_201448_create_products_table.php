@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('product_name');
             $table->integer('price');
             $table->integer('stock');
-            $table->string('company');
+            $table->integer('company_id');
             $table->text('description')->nullable();
             $table->timestamps();
         });
