@@ -29,7 +29,13 @@ Route::get('home', function () {
     return view('home');
 })->name('home');
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+});
+
+Route::get('/login', function () {
+    return view('login.login_form');
+})->name('login');
 
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');

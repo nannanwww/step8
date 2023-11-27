@@ -11,12 +11,16 @@ class LoginFormRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize() {
-        return true; }
+    public function authorize()
+    {
+        return true;
+    }
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'email' => 'required|email',
-            'password'=> 'required',
-        ]; }
+            'password' => 'required',
+        ];
+    }
 }

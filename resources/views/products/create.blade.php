@@ -31,11 +31,13 @@
                 <div class="product-details">
                     <div class="detail-row">
                         <label for="inputProduct_name">商品名<span>*</span></label>
-                        <input type="text" name="product_name" id="inputProduct_name" required>
+                        <input type="text" name="product_name" id="inputProduct_name" value="{{ old('product_name') }}"
+                            required>
                     </div>
                     <div class="detail-row">
                         <label for="inputCompany">メーカー名<span>*</span></label>
-                        <input type="text" list="companies" name="company_name" required>
+                        <input type="text" list="companies" name="company_name" value="{{ old('company_name') }}"
+                            required>
                         <datalist id="companies">
                             <option value="">会社名を選択してください</option>
                             @foreach($companies as $id => $company)
@@ -45,15 +47,17 @@
                     </div>
                     <div class="detail-row">
                         <label for="inputPrice">価格<span>*</span></label>
-                        <input type="text" name="price" id="inputPrice" title="数字を入力してください" required>
+                        <input type="text" name="price" id="inputPrice" title="数字を入力してください" value="{{ old('price') }}"
+                            required>
                     </div>
                     <div class="detail-row">
                         <label for="inputStock">在庫数<span>*</span></label>
-                        <input type="text" name="stock" id="inputStock" title="数字を入力してください" required>
+                        <input type="text" name="stock" id="inputStock" title="数字を入力してください" value="{{ old('stock') }}"
+                            required>
                     </div>
                     <div class="detail-row">
                         <label for="inputDescription">コメント</label>
-                        <textarea name="description" id="inputDescription"></textarea>
+                        <textarea name="description" id="inputDescription">{{ old('description') }}</textarea>
                     </div>
                     <div class="detail-row">
                         <label for="inputImage">商品画像</label>
