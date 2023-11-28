@@ -15,10 +15,10 @@
             <h1>商品一覧画面</h1>
             <div>
                 <input type="text" id="key_word" class="key-word" placeholder="検索キーワード" name="key_word">
-                <select type="text" id="key_company" class="key-company" placeholder="メーカー名" name="key_company">
-                    <option value="">メーカー名を選択</option>
-                    @foreach($companies as $id => $company)
-                    <option value="{{ $id }}">{{ $company }}</option>
+                <select type="text" id="key_company" class="key-company" name="key_company">
+                    <option value="" disabled selected>メーカー名を選択</option>
+                    @foreach($companies as $companyId => $companyName)
+                    <option value="{{ $companyId }}">{{ $companyName }}</option>
                     @endforeach
                 </select>
                 <button type="submit" id="search_button">検索</button>

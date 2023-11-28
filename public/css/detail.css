@@ -53,11 +53,16 @@ label {
 
 input[type="text"],
 textarea,
-.image-input-container {
+.image-input-container,
+select {
     width: calc(100% - 170px);
     padding: 5px;
     border-radius: 3px;
     border: 1px solid #ccc;
+}
+
+select {
+    width: calc(100% - 160px);
 }
 
 .product_image {

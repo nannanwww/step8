@@ -11,7 +11,7 @@ class Company extends Model
 
     protected $table = 'companies';
 
-    protected $fillable = ['id', 'company_name', 'street_address', 'representative_name'];
+    protected $fillable = ['company_name', 'street_address', 'representative_name'];
 
     public function product()
     {

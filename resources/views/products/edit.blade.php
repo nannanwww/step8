@@ -41,14 +41,14 @@
                     </div>
                     <div class="detail-row">
                         <label for="inputCompany">メーカー名<span>*</span></label>
-                        <input type="text" list="companies" name="company_name" required
-                            value="{{ $companies[$product->company_id] ?? '' }}">
-                        <datalist id="companies">
+                        <select name="company_name" required> <!-- name を company_id に変更 -->
                             <option value="">会社名を選択してください</option>
-                            @foreach($companies as $company)
-                            <option value="{{ $company }}">
-                                @endforeach
-                        </datalist>
+                            @foreach($companies as $companyId => $companyName) <!-- $companies のキーを company_id に変更 -->
+                            <option value="{{ $companyId }}" {{ $product->company_id == $companyId ? 'selected' : '' }}>
+                                {{ $companyName }}
+                            </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="detail-row">
                         <label for="price">価格<span>*</span></label>

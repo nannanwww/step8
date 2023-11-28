@@ -16,15 +16,7 @@
             {{ session('success') }}
         </div>
         @endif
-        @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
+        <!-- エラーと成功はアラートにしてみます -->
         <div class="contains">
             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -36,14 +28,13 @@
                     </div>
                     <div class="detail-row">
                         <label for="inputCompany">メーカー名<span>*</span></label>
-                        <input type="text" list="companies" name="company_name" value="{{ old('company_name') }}"
-                            required>
-                        <datalist id="companies">
+                        <!-- 新規でメーカーを増やさないので、手動入力はできないように -->
+                        <select name="company_name" required>
                             <option value="">会社名を選択してください</option>
                             @foreach($companies as $id => $company)
                             <option value="{{ $company }}">{{ $company }}</option>
                             @endforeach
-                        </datalist>
+                        </select>
                     </div>
                     <div class="detail-row">
                         <label for="inputPrice">価格<span>*</span></label>
@@ -66,12 +57,14 @@
                 </div>
                 <div class="button-container">
                     <button type="submit" class="submit form-submit">新規登録</button>
-                    <button type="button" onclick="location.href='{{ route('products.index') }}'"
+                    <button type="button" onclick="location.href='{{ URL::previous() }}'"
                         class="submit back">戻る</button>
                 </div>
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/create.js') }}"></script>
 </body>
 
 </html>

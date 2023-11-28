@@ -20,11 +20,11 @@ class ProductController extends Controller
     {
         $products = Product::query();
         $companies = Company::pluck('company_name', 'id');
-        logger($companies);
 
         $keyword = $request->input('key_word');
         $company_id = $request->input('key_company');
 
+        // 検索機能
         if ($keyword) {
             $products = $products->where(function ($query) use ($keyword) {
                 $query->where('product_name', 'like', '%' . $keyword . '%')
@@ -36,15 +36,17 @@ class ProductController extends Controller
             $products = $products->where('company_id', $company_id);
         }
 
-        $products = $products->orderBy('product_name')->paginate(6);
-        $request->session()->put('products_page', $products->currentPage());
-        $request->session()->put('searchParams', $request->getQueryString());
-
-        $errorMessage = '';
+        if (!$keyword && !$company_id) {
+            $products = Product::orderBy('product_name')->paginate(6);
+        } else {
+            $products = $products->orderBy('product_name')->paginate(6);
+        }
 
         if ($request->has('key_word') && $products->isEmpty()) {
             $errorMessage = '検索キーワードに一致する商品が見つかりませんでした。';
         }
+
+        $errorMessage = '';
 
         $requestParams = $request->getQueryString();
 
@@ -55,10 +57,6 @@ class ProductController extends Controller
             'requestParams' => $requestParams,
         ]);
     }
-
-
-
-
 
     public function create()
     {
@@ -78,58 +76,18 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // DBトランザクションの開始
-        DB::beginTransaction();
-
         try {
+            $product = new Product();
+            $product->createProduct($request);
 
-            $companyName = $request->input("company_name");
-            $companyId = Company::where('company_name', $companyName)->value('id');
-
-            $product = new Product;
-            $product->product_name = $request->input("product_name");
-
-            if ($companyId) {
-                // 既存のメーカーが選択された場合
-                $product->company_id = $companyId;
-            } else {
-                // 新しいメーカー名が入力された場合
-                $newCompany = new Company;
-                $newCompany->company_name = $companyName;
-                $newCompany->save();
-                $product->company_id = $newCompany->id;
-            }
-
-            $product->price = $request->input("price");
-            $product->stock = $request->input("stock");
-            $product->description = $request->input("description");
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/images', $imageName); // 画像を保存
-                $product->image = 'storage/images/' . $imageName;
-            }
-
-            $product->save();
-
-            DB::commit();
-
-            return redirect('/products');
+            return redirect('/products/create')->with('success', '登録に成功しました。');
         } catch (\Exception $e) {
-            // エラー時の処理
-            DB::rollBack();
-
-            // エラーをログに記録する
-            Log::error('エラーが発生しました: ' . $e->getMessage());
-
+            \Log::error('エラーが発生しました: ' . $e->getMessage());
             return back()->withInput()->withErrors(['error' => 'エラーが発生しました。']);
         }
     }
 
-
-
-    public function showDetail($id)
+    public function showDetail($id, Request $request)
     {
         $product = Product::find($id);
         $companyName = Company::find($product->company_id)->company_name;
@@ -142,33 +100,12 @@ class ProductController extends Controller
 
     public function delete($id)
     {
-        // DBトランザクションの開始
-        DB::beginTransaction();
-
         try {
-            $product = Product::findOrFail($id);
-
-            $companyId = $product->company_id;
-
-            // Productを削除する前に、その会社に他の商品がないかチェックする
-            $otherProducts = Product::where('company_id', $companyId)->where('id', '!=', $id)->count();
-
-            if ($otherProducts === 0) {
-                // その会社に他の商品がない場合は、会社も削除する
-                Company::where('id', $companyId)->delete();
-            }
-
-            $product->delete();
-
-            DB::commit();
+            $product = new Product();
+            $product->deleteProduct($id);
             return redirect('/products');
         } catch (\Exception $e) {
-            // エラー時の処理
-            DB::rollBack();
-
-            // エラーをログに記録する
-            Log::error('エラーが発生しました: ' . $e->getMessage());
-
+            \Log::error('エラーが発生しました: ' . $e->getMessage());
             return back()->withInput()->withErrors(['error' => 'エラーが発生しました。']);
         }
     }
@@ -188,12 +125,9 @@ class ProductController extends Controller
         ]);
     }
 
-
-
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $companyName = $request->input("company_name");
 
         $request->validate([
             'product_name' => 'required|max:20',
@@ -203,49 +137,17 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // DBトランザクションの開始
-        DB::beginTransaction();
-        try {
-            // 更新処理
-            $product->product_name = $request->input("product_name");
-            $product->price = $request->input("price");
-            $product->stock = $request->input("stock");
-            $product->description = $request->input("description");
-
-            $companyId = Company::where('company_name', $companyName)->value('id');
-            if ($companyId) {
-                // 既存のメーカーが選択された場合
-                $product->company_id = $companyId;
-            } else {
-                // 新しいメーカー名が入力された場合
-                $newCompany = new Company;
-                $newCompany->company_name = $companyName;
-                $newCompany->save();
-                $product->company_id = $newCompany->id;
-            }
-
-            if ($request->hasFile('image')) {
-                $image = $request->file('image');
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->storeAs('public/images', $imageName);
-                $product->image = 'storage/images/' . $imageName;
-            }
-
-            $product->save();
-
-            DB::commit();
-
-            return redirect()->route('products.showDetail', ['id' => $id])->with('success', 'Product updated successfully');
-        } catch (\Exception $e) {
-            // エラー時の処理
-            DB::rollBack();
-
-            // エラーをログに記録する
-            Log::error('エラーが発生しました: ' . $e->getMessage());
-
-            return back()->withInput()->withErrors(['error' => 'エラーが発生しました。']);
-
+        if (!$product) {
+            abort(404);
         }
 
+        try {
+            $product->updateProduct($request);
+
+            return redirect()->route('products.edit', ['id' => $id])->with('success', '更新完了しました。');
+        } catch (\Exception $e) {
+            \Log::error('エラーが発生しました: ' . $e->getMessage());
+            return back()->withInput()->withErrors(['error' => 'エラーが発生しました。']);
+        }
     }
 }

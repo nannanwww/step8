@@ -49,7 +49,6 @@ $(document).ready(function() {
     });
 });
 
-// ページが維持されるために
 function saveSearchParamsAndRedirect(params, detailUrl) {
     sessionStorage.setItem('searchParams', params);
     window.location.href = detailUrl;
