@@ -49,8 +49,11 @@ class Product extends Model
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/images', $imageName);
             $product->image = 'storage/images/' . $imageName;
+        } else {
+            $imageName = '';
         }
 
+        $product->image = $imageName;
         $product->save();
     }
 
@@ -74,6 +77,8 @@ class Product extends Model
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/images', $imageName);
             $product->image = 'storage/images/' . $imageName;
+        } else {
+            $imageName = '';
         }
 
         $product->save();

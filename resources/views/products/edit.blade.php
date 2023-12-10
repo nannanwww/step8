@@ -41,9 +41,9 @@
                     </div>
                     <div class="detail-row">
                         <label for="inputCompany">メーカー名<span>*</span></label>
-                        <select name="company_name" required> <!-- name を company_id に変更 -->
+                        <select name="company_name" required>
                             <option value="">会社名を選択してください</option>
-                            @foreach($companies as $companyId => $companyName) <!-- $companies のキーを company_id に変更 -->
+                            @foreach($companies as $companyId => $companyName)
                             <option value="{{ $companyId }}" {{ $product->company_id == $companyId ? 'selected' : '' }}>
                                 {{ $companyName }}
                             </option>
@@ -73,10 +73,6 @@
                             @else
                             <div class="spacer">
                                 No image
-                                <!-- ②商品編集時に画像を選択しなおさないと登録ができなくなってしまっているので、 
-                                画像が選ばれていない時はimageカラムへの更新をスキップするようにしましょう。
-                                <input type="file" name="image" id="image" accept="image/*" value="{{$product->image}}"
-                                    class="input-file"> -->
                             </div>
                             @endif
                         </div>

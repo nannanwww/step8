@@ -23,7 +23,6 @@ Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('showRegistrationForm');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
-//Route::get('home',[HomeController::class,'home']) -> name('home');
 
 Route::get('home', function () {
     return view('home');

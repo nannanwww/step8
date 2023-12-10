@@ -6,7 +6,7 @@ body {
 }
 
 .contains {
-  width: 780px;
+  width: 850px;
   height: 550px;
   margin: 0 auto;
   font-family: Arial, sans-serif;
@@ -59,7 +59,8 @@ h1 {
 
 table#products_table {
   width: 100%;
-  max-width: 700px;
+  max-width: 850px;
+  max-height: 500px;
   margin-top: 70px;
   padding: 10px;
   border-collapse: collapse;
@@ -92,6 +93,105 @@ select {
   margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.sort_button,
+.limit_button,
+#products_table a {
+  display: block;
+  width: 105%;
+  color:#050505;
+  background-color: white;
+  text-decoration: none;
+  border:none;
+  font-weight: bold;
+  font-size:16px;
+  text-align: center;
+  float: center;
+  margin:auto;
+}
+
+.sort_button:hover,
+.limit_button:hover,
+#products_table a:hover {
+  cursor: pointer;
+  color:blue;
+}
+
+.limit_button:hover {
+  cursor: pointer;
+}
+
+.limit_check {
+  display: none;
+}
+
+.limit_popup {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 45%;
+  transform: translateX(-50%);
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
+}
+
+.stock_popup {
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 57%;
+  transform: translateX(-50%);
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease, bottom 0.3s ease;
+}
+
+.limit_check:checked + .limit_popup,
+.limit_check:checked + .stock_popup {
+  top:170px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.limit_popup form {
+  display: flex;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.limit_popup input,
+.stock_popup input {
+  width: 20%;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.limit_popup input[type="number"],
+.stock_popup input[type="number"] {
+  padding: 0.5em 1em;
+  width: 20%;
+  font-size: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.limit_popup input[type="submit"],
+.stock_popup input[type="submit"] {
+  padding: 2px 2px;
+  font-size: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 img {
@@ -156,7 +256,7 @@ img {
   transform: translateX(-50%);
   padding: 20px 10px;
   font-size: 20px;
-  margin-left: 350px;
+  margin-left: 400px;
 }
 
 .pagination a {
@@ -171,4 +271,12 @@ img {
   font-size: 20px;
   border: 1px solid black;
   margin: -2.5px;
+}
+
+.pagination a:hover {
+  background-color: lightblue;
+}
+
+.pagination .active {
+  color: white;
 }

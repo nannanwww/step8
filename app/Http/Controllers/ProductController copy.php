@@ -36,24 +36,27 @@ class ProductController extends Controller
             $products = $products->where('company_id', $company_id);
         }
 
+        // 商品名とメーカー名ボタンのソート
+        if ($request->has('sort') && $request->input('sort') === '1') {
+            $products = $products->orderBy('product_name');
 
-        // 名前のソート
-        $sortColumn = $request->input('sort');
-        $sortOrder = $request->input('order');
+            // 連続押下で昇順・降順を切り替えるための処理
+            if (strpos($request->input('sort'), '_desc') !== false) {
+                $products = $products->orderByDesc('product_name');
+            } else {
+                $products = $products->orderBy('product_name');
+            }
+        } elseif ($request->has('sort') && $request->input('sort') === '2') {
+            $products = $products->select('products.*')->join('companies', 'products.company_id', '=', 'companies.id')
+                ->orderBy('companies.company_name');
 
-        if ($sortColumn && in_array($sortColumn, ['1', '2'])) {
-            $direction = $sortOrder === 'desc' ? 'desc' : 'asc';
-
-            if ($sortColumn == '1') {
-                $products = $products->orderBy('product_name', $direction);
-            } elseif ($sortColumn == '2') {
-                // companiesテーブルを結合してソート
-                $products = $products->select('products.*')
-                    ->join('companies', 'products.company_id', '=', 'companies.id')
-                    ->orderBy('companies.company_name', $direction);
+            // 連続押下で昇順・降順を切り替えるための処理
+            if (strpos($request->input('sort'), '_desc') !== false) {
+                $products = $products->orderByDesc('companies.company_name');
+            } else {
+                $products = $products->orderBy('companies.company_name');
             }
         } else {
-            // デフォルトはID順
             $products = $products->orderBy('id');
         }
 
@@ -84,10 +87,6 @@ class ProductController extends Controller
         }
 
         // ページネーションを6に
-
-
-        // ページネーションを適用
-        //$products = $products->paginate(6)->appends(request()->query());
         $products = $products->paginate(6);
 
         if ($request->has('key_word') && $products->isEmpty()) {

@@ -16,7 +16,7 @@
             {{ session('success') }}
         </div>
         @endif
-        <!-- エラーと成功はアラートにしてみます -->
+        <!-- エラーと成功はアラートに -->
         <div class="contains">
             <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -28,7 +28,6 @@
                     </div>
                     <div class="detail-row">
                         <label for="inputCompany">メーカー名<span>*</span></label>
-                        <!-- 新規でメーカーを増やさないので、手動入力はできないように -->
                         <select name="company_name" required>
                             <option value="">会社名を選択してください</option>
                             @foreach($companies as $id => $company)
