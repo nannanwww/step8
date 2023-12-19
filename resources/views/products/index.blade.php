@@ -47,10 +47,8 @@
                                     <span>~</span>
                                     <input type="number" name="maxPrice" class="max-box-Price" placeholder="最大値"
                                         value="{{ old('maxPrice', request()->input('maxPrice')) }}" max="9999">
-                                    <!-- <input type="submit" value=">>"> -->
-                                    <!-- <a href="{{ route('products.index', array_merge(request()->query(), ['sort' => '3'])) }}"
-                                        class="sort_button" data-value="3">>></a> -->
-                                    <a href="javascript:void(0)" class="sort_button price-sort" data-value="3">>></a>
+                                    <input type="submit" href="javascript:void(0)" class="sort_button price-sort"
+                                        data-value="3" value=">>">
                                 </form>
                             </div>
                         </th>
@@ -65,10 +63,8 @@
                                     <span>~</span>
                                     <input type="number" name="maxStock" class="max-box-Stock" placeholder="最大値"
                                         value="{{ old('maxStock', request()->input('maxStock')) }}" max="9999">
-                                    <!-- <input type="submit" value=">>" onclick="submitStockForm(event)"> -->
-                                    <!-- <a href="{{ route('products.index', array_merge(request()->query(), ['sort' => '4'])) }}"
-                                        class="sort_button" data-value="4">>></a> -->
-                                    <a href="#" class="sort_button stock-sort" data-value="4">>></a>
+                                    <input type="submit" href="#" class="sort_button stock-sort" data-value="4"
+                                        value=">>">
                                 </form>
                             </div>
                         </th>
