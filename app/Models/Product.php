@@ -11,6 +11,13 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $sortable = [
+        'product_name',
+        'price',
+        'stock',
+        'company_id',
+    ];
+
     protected $fillable = ['id', 'image', 'product_name', 'price', 'stock', 'company_id'];
 
     public function company()

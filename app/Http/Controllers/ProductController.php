@@ -47,7 +47,6 @@ class ProductController extends Controller
             if ($sortColumn == '1') {
                 $products = $products->orderBy('product_name', $direction);
             } elseif ($sortColumn == '2') {
-                // companiesテーブルを結合してソート
                 $products = $products->select('products.*')
                     ->join('companies', 'products.company_id', '=', 'companies.id')
                     ->orderBy('companies.company_name', $direction);
@@ -58,36 +57,22 @@ class ProductController extends Controller
         }
 
         // 価格のソート
-        $min = $request->input('min');
-        $max = $request->input('max');
-        if ($min || $max) {
-            if ($min) {
-                $products = $products->where('price', '>=', $min);
-            }
-            if ($max) {
-                $products = $products->where('price', '<=', $max);
-            }
-            $products = $products->orderBy('price');
-        }
+        $priceMin = $request->input('minPrice');
+        $priceMax = $request->input('maxPrice');
+        $products = $products->when($priceMin || $priceMax, function ($query) use ($priceMin, $priceMax) {
+            return $query->whereBetween('price', [$priceMin ?? 0, $priceMax ?? PHP_INT_MAX]);
+        });
 
         // 在庫のソート
-        $stockMin = $request->input('min');
-        $stockMax = $request->input('max');
-        if ($stockMin || $stockMax) {
-            if ($stockMin) {
-                $products = $products->where('stock', '>=', $stockMin);
-            }
-            if ($stockMax) {
-                $products = $products->where('stock', '<=', $stockMax);
-            }
-            $products = $products->orderBy('stock');
-        }
+        $stockMin = $request->input('minStock');
+        $stockMax = $request->input('maxStock');
+        $products = $products->when($stockMin || $stockMax, function ($query) use ($stockMin, $stockMax) {
+            return $query->whereBetween('stock', [$stockMin ?? 0, $stockMax ?? PHP_INT_MAX]);
+        });
+
+
 
         // ページネーションを6に
-
-
-        // ページネーションを適用
-        //$products = $products->paginate(6)->appends(request()->query());
         $products = $products->paginate(6);
 
         if ($request->has('key_word') && $products->isEmpty()) {
